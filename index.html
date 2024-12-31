@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Year's Eve Countdown</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-align: center;
+        }
+        /* Video background container */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .video-background iframe {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+        }
+        #countdown {
+            font-size: 3em;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: inline-block;
+            z-index: 1;
+            position: relative;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 20px 0;
+            z-index: 1;
+            position: relative;
+        }
+        .rounded-section {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            position: relative;
+        }
+        footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #ddd;
+            z-index: 1;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-background">
+        <iframe 
+            src="https://www.youtube.com/embed/YDvsBbKfLPA?autoplay=1&loop=1&controls=0&showinfo=0&playlist=YDvsBbKfLPA"
+            frameborder="0"
+            allow="autoplay; fullscreen"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <div id="countdown"></div>
+
+
+  
+
+    <script>
+        function updateCountdown() {
+            const newYear = new Date('January 1, 2025 00:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = newYear - now;
+
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % 1000 * 60) / 1000);
+
+            document.getElementById("countdown").textContent =
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (timeLeft < 0) {
+                document.getElementById("countdown").textContent = "🎉 Happy New Year! 🎉";
+                clearInterval(countdownInterval);
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
